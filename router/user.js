@@ -6,6 +6,8 @@ const Recept = require("../models/Recept");
 const User = mongoose.model("User");
 const { catchErrors } = require("../helpers/errorHandler");
 const recipeController = require("../controllers/recipeController");
+const userController = require("../controllers/userController");
+const authController = require("../controllers/authController");
 
 // --- GET USERS LISTENING  ---//
 router.get("/", function(req, res, next) {
@@ -65,5 +67,11 @@ router.post(
 
 /* Hämta alla recept som användaren sparat till sina "Hearts" */
 router.get("/hearts/:id", recipeController.getHeartedRecipes);
+
+/* Hämta en specifik användare */
+router.get("/profile/author/:id", userController.getUser);
+
+/* Redigera en profil */
+router.post("/edit/:id", userController.editUser);
 
 module.exports = router;

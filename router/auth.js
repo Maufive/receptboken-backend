@@ -20,6 +20,9 @@ router.post("/login", (req, res, next) => {
 	authController.login(req, res, next);
 });
 
+/* POST VERIFY USER */
+router.post("/verify/:id", authController.verifyUser);
+
 /* GET LOGOUT */
 router.get("/logout", authController.logout);
 

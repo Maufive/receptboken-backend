@@ -5,16 +5,20 @@ const Schema = mongoose.Schema;
 const ShoppingListSchema = new Schema({
 	list: {
 		type: Array,
-		required
+		required: true
 	},
 	created: {
 		type: Date,
 		default: Date.now
 	},
-	user: {
+	title: {
+		type: String,
+		required: true
+	},
+	author: {
 		type: mongoose.Schema.ObjectId,
 		ref: "User",
-		required
+		required: "Du måste ange en author"
 	}
 });
 

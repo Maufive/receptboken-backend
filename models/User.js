@@ -22,6 +22,11 @@ const UserSchema = new Schema({
 		trim: true,
 		validator: [validator.isEmail, "Ogiltig Epost Adress"]
 	},
+	description: {
+		type: String,
+		trim: true
+	},
+	photo: String,
 	resetPasswordToken: String,
 	resetPasswordExpires: Date,
 	hearts: [{ type: mongoose.Schema.ObjectId, ref: "Recept" }]

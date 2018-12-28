@@ -69,6 +69,16 @@ exports.login = async (req, res, next) => {
 	}
 };
 
+/* POST VERIFY USER */
+// Authentisera användaren och plocka ut IDt från req.body och jåmför de  så de stämmer överens
+exports.verifyUser = async (req, res, next) => {
+	passport.authenticate("jwt", { session: false }, (error, user) => {
+		const userId = req.params.id;
+		const verified = user._id.equals(userId);
+		res.send(verified);
+	})(req, res, next);
+};
+
 /* GET LOGOUT */
 // För att göra en logout med JWT så måste jag lägga in en funktion i klienten som tar bort JWT från localStorage
 // och användaren "loggas" ut.

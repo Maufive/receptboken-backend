@@ -19,3 +19,33 @@ exports.validateRegister = (req, res, next) => {
 	}
 	next(); // om det inte var några errors, skicka vidare till nästa middleware!
 };
+
+exports.getUser = async (req, res) => {
+	const id = req.params.id;
+	const user = await User.findOne({ _id: id });
+	return res.json(user);
+};
+
+exports.editUser = async (req, res) => {
+	const id = req.params.id;
+	const data = req.body.data;
+	// Kolla så användaren är verifierad
+	if (data.verified) {
+		const update = await User.findOneAndUpdate(
+			{ _id: id },
+			// Datan som ska uppdateras
+			{
+				fname: data.fname,
+				lname: data.lname,
+				photo: data.photo,
+				description: data.description
+			},
+			// Options
+			{
+				new: true,
+				runValidators: true
+			}
+		).exec();
+		res.send("Din profil är nu uppdaterad");
+	}
+};
